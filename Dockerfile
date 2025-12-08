@@ -17,11 +17,11 @@ COPY .env.example .
 COPY src ./src
 COPY scripts ./scripts
 
-# Install the package itself so absolute imports resolve everywhere
-RUN pip install --no-cache-dir --no-deps .
-
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD curl -f http://localhost:8000/health || exit 1
 
-CMD ["fastmcp", "run", "bigquery_mcp.server", "--host", "0.0.0.0", "--port", "8000"]
+# Install the package itself so absolute imports resolve everywhere
+RUN pip install --no-cache-dir --no-deps .
+
+CMD ["fastmcp", "run", "src/bigquery_mcp/server.py", "--host", "0.0.0.0", "--port", "8000"]
