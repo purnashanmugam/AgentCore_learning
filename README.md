@@ -86,12 +86,13 @@ python3.11 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install -e .
 
 # load env vars (if using .env)
 export $(grep -v '^#' .env | xargs)
 
-# start the MCP server over HTTP
-fastmcp run src/bigquery_mcp/server.py --host 0.0.0.0 --port 8000
+# start the MCP server over HTTP (package installed via `pip install -e .`)
+fastmcp run bigquery_mcp.server --host 0.0.0.0 --port 8000
 ```
 
 Once running, test the health endpoint:
