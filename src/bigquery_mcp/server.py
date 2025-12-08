@@ -6,10 +6,10 @@ import asyncio
 import logging
 import time
 from contextlib import asynccontextmanager
-from typing import Callable
+from typing import Any, Callable
 
 from fastmcp import FastMCP
-from fastmcp.tools import ToolResult
+from fastmcp.tools.tool import ToolResult
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
