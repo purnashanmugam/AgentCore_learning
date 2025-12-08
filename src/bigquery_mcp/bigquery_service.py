@@ -161,7 +161,8 @@ class BigQueryService:
         if current_chunk:
             chunks.append(QueryChunk(chunk_index=chunk_index, rows=current_chunk))
 
-        truncated = query_job.total_rows is not None and row_count < query_job.total_rows
+        total_rows = getattr(query_job, "total_rows", None)
+        truncated = total_rows is not None and row_count < total_rows
         duration_ms = (time.perf_counter() - start) * 1000
 
         return QueryResult(

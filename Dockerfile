@@ -21,4 +21,7 @@ EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD curl -f http://localhost:8000/health || exit 1
 
+# Install the package itself so absolute imports resolve everywhere
+RUN pip install --no-cache-dir --no-deps .
+
 CMD ["fastmcp", "run", "src/bigquery_mcp/server.py", "--host", "0.0.0.0", "--port", "8000"]

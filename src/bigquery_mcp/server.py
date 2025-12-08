@@ -6,25 +6,25 @@ import asyncio
 import logging
 import time
 from contextlib import asynccontextmanager
-from typing import Callable
+from typing import Any, Callable
 
 from fastmcp import FastMCP
-from fastmcp.tools import ToolResult
+from fastmcp.tools.tool import ToolResult
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
-from .aws_secrets import SecretsManagerProvider
-from .bigquery_service import BigQueryService, QueryResult
-from .config import AppConfig, load_config
-from .exceptions import (
+from bigquery_mcp.aws_secrets import SecretsManagerProvider
+from bigquery_mcp.bigquery_service import BigQueryService, QueryResult
+from bigquery_mcp.config import AppConfig, load_config
+from bigquery_mcp.exceptions import (
     MCPServerError,
     QueryExecutionError,
     QueryValidationError,
     TableNotFoundError,
 )
-from .logging_config import configure_logging
-from .utils import error_response, generate_request_id, success_response
-from .validators import validate_sql_query
+from bigquery_mcp.logging_config import configure_logging
+from bigquery_mcp.utils import error_response, generate_request_id, success_response
+from bigquery_mcp.validators import validate_sql_query
 
 CONFIG: AppConfig | None = None
 LOGGER: logging.Logger | None = None
